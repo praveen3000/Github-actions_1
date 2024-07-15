@@ -1,5 +1,5 @@
 name: First-Action
-on: workflow_dispatch
+on: push
 jobs:
   first-job: 
     runs-on: ubuntu-latest
@@ -8,3 +8,13 @@ jobs:
         run: echo "Hello world!"
       - name: print goodbye
         run: echo "adios amigos"
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run test
+        run: npm test
